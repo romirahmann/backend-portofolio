@@ -18,7 +18,7 @@ router.use('/auth/', auth_routes);
 
 
 // master data routes usage 
-router.use('/master/', accessControl,verifyToken, masterRoutes);
+router.use('/master/', accessControl, masterRoutes);
 
 
 //kecuali master, seharusnya routes dipisah per-table

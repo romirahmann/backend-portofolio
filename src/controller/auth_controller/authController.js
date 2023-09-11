@@ -2,13 +2,14 @@ const model = require("../../model/auth.model");
 const { generateToken } = require("../../services/auth.service");
 
 const login = async (req, res) => {
-  const { nik, password } = req.body;
+  const { username, password } = req.body;
+  console.log(username, password);
 
-  if (!nik || !password) {
-    return res.status(400).json({ message: 'Please provide both nik and password.' });
+  if (!username || !password) {
+    return res.status(400).json({ message: 'Please provide both username and password.' });
   }
 
-  let user = await model.login(nik, password);
+  let user = await model.login(username, password);
   if(!user.length > 0){
     return res.status(401).json({ message: 'Account not found!' });
   }
@@ -16,11 +17,8 @@ const login = async (req, res) => {
   // Generate a JWT token and send it in the response
   const payload = {
     id: user.id,
-    nik: user.nik,
-    name: user.name,
-    role_id: user.role_id,
-    role_detail: user.role_detail,
-    permissions: user.permissions
+    username: user.username,
+    password: user.password
   };
 
   const token = generateToken(payload);

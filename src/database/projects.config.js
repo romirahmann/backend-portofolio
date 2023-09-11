@@ -1,4 +1,4 @@
-const sakila = require('knex')({
+const projects = require('knex')({
     client: 'mysql',
     connection: {
       host : process.env.DB_HOST,
@@ -24,6 +24,6 @@ const sakila = require('knex')({
     }
 });
 
-sakila.client.config.connectionOptions = { multipleStatements: false };
+projects.client.config.connectionOptions = { multipleStatements: false };
 
-module.exports = sakila;
+module.exports = projects;

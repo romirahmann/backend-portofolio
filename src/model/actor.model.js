@@ -1,4 +1,4 @@
-const sakila = require('./../database/sakila.config');
+const sakila = require('../database/projects.config');
 
 getAll = async () => await sakila.select('*').from('actor');
 
