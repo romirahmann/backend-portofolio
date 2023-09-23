@@ -3,7 +3,6 @@ const { generateToken } = require("../../services/auth.service");
 
 const login = async (req, res) => {
   const { username, password } = req.body;
-  console.log(username, password);
 
   if (!username || !password) {
     return res.status(400).json({ message: 'Please provide both username and password.' });
