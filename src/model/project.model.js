@@ -1,7 +1,6 @@
 const project = require("../database/projects.config");
 
 const getAll = async () => await project.select("*").from("projects");
-0;
 const getByIdProject = async (projectId) =>
   await project
     .select("*")

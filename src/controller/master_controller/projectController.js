@@ -14,7 +14,7 @@ const getProjectByProjectId = async (req, res) => {
   const projectId = req.params.projectId;
   if (!isNaN(projectId)) {
     try {
-      const dataProjects = await model.getProjectByProjectId(projectId);
+      const dataProjects = await model.getByIdProject(projectId);
       return api.ok(res, dataProjects);
     } catch {
       return api.error(res, "Internal Server Error", 500);
@@ -29,7 +29,7 @@ const insertProject = async (req, res) => {
     const data = await model.insert(newData);
     return api.ok(res, data);
   } catch {
-    return api.error(res, "Gagal menambahkan Project");
+    return api.error(res, "Gagal menambahkan Project", 500);
   }
 };
 
