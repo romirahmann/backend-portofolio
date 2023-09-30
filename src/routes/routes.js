@@ -5,6 +5,8 @@ const path = require('path')
 
 const masterRoutes = require('./master_routes/master.routes');
 const auth_routes = require('./utility_routes/auth.routes');
+const UploadImgController = require('./../controller/master_controller/UploadImgController')
+const upload = require('./../../src/services/upload-img')
 
 const { verifyToken, accessControl } = require('../services/auth.service');
 
@@ -19,6 +21,11 @@ router.use('/auth/', auth_routes);
 
 // master data routes usage 
 router.use('/master/', accessControl, masterRoutes);
+
+// Upload Image
+router.get('/file/:filename', UploadImgController.getFile)
+router.post('/upload', upload.single('file'), UploadImgController.uploadFile)
+router.delete('/delete/:filename', UploadImgController.deleteFile)
 
 
 //kecuali master, seharusnya routes dipisah per-table
