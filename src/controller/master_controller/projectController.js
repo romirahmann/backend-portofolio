@@ -1,9 +1,26 @@
 const model = require("../../model/project.model");
 const api = require("../../tools/common");
 
+const getProjectsOnly = async (req, res) => {
+  try {
+    const dataProjects = await model.getProjectOnly();
+    return api.ok(res, dataProjects);
+  } catch {
+    return api.error(res, "Gagal ambil seluruh data project!");
+  }
+};
 const getAllProjects = async (req, res) => {
   try {
     const dataProjects = await model.getAll();
+    return api.ok(res, dataProjects);
+  } catch {
+    return api.error(res, "Gagal ambil seluruh data project!");
+  }
+};
+
+const getAllData = async (req, res) => {
+  try {
+    const dataProjects = await model.getAllData();
     return api.ok(res, dataProjects);
   } catch {
     return api.error(res, "Gagal ambil seluruh data project!");
@@ -69,4 +86,6 @@ module.exports = {
   insertProject,
   updateProject,
   softDelete,
+  getAllData,
+  getProjectsOnly
 };

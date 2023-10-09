@@ -1,5 +1,7 @@
 const path = require("path");
 const fs = require("fs");
+const model = require("../../model/img.model");
+const api = require("../../tools/common");
 
 const uploadFile = async (req, res) => {
     if (!req.file) {
@@ -37,4 +39,14 @@ const deleteFile = async (req, res) => {
     }
 };
 
-module.exports = { uploadFile, getFile, deleteFile };
+const insertData = async (req, res) => {
+    const newData = req.body
+    try{
+        const data = await model.insert(newData)
+        return api.ok(res, data);
+    } catch {
+        return api.error(res, "Internal Server Error", 500)
+    }
+}
+
+module.exports = { uploadFile, getFile, deleteFile, insertData };
