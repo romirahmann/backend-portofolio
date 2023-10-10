@@ -57,6 +57,33 @@ const getAllData = async () => await project
   'c.categories_name'
 );
 
+const getAllDataById = async (projectId) => await project
+.select(
+  'p.project_id',
+  'p.project_title',
+  'p.description',
+  'p.categories_id',
+  'p.created_at',
+  'p.updated_at',
+  'p.is_deleted',
+  project.raw('GROUP_CONCAT(i.image_name) as image_names'),
+  'c.categories_name'
+)
+.from('projects as p')
+.leftJoin('images as i', 'p.project_id', '=', 'i.project_id')
+.join('category as c', 'p.categories_id', '=', 'c.categories_id')
+.where('p.project_id', '=', projectId)
+.groupBy(
+  'p.project_id',
+  'p.project_title',
+  'p.description',
+  'p.categories_id',
+  'p.created_at',
+  'p.updated_at',
+  'p.is_deleted',
+  'c.categories_name'
+);
+
 module.exports = {
   getAll,
   getByIdProject,
@@ -64,5 +91,6 @@ module.exports = {
   update,
   softDelete,
   getAllData,
-  getProjectOnly
+  getProjectOnly,
+  getAllDataById
 };

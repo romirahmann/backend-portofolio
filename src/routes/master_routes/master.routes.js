@@ -9,6 +9,7 @@ const UploadImgController = require("../../controller/master_controller/UploadIm
 router.get("/projects", ProjectsController.getAllProjects);
 router.get("/project-only", ProjectsController.getProjectsOnly);
 router.get("/data-projects", ProjectsController.getAllData);
+router.get("/data-projects/:projectId", ProjectsController.getAllDataByProjectId);
 router.get("/project/:projectId", ProjectsController.getProjectByProjectId);
 router.post("/project", ProjectsController.insertProject);
 router.put("/update-project/:projectId", ProjectsController.updateProject);

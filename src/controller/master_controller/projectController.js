@@ -26,6 +26,15 @@ const getAllData = async (req, res) => {
     return api.error(res, "Gagal ambil seluruh data project!");
   }
 };
+const getAllDataByProjectId = async (req, res) => {
+  const projectId = req.params.projectId
+  try {
+    const dataProjects = await model.getAllDataById(projectId);
+    return api.ok(res, dataProjects);
+  } catch {
+    return api.error(res, "Gagal ambil seluruh data project!");
+  }
+};
 
 const getProjectByProjectId = async (req, res) => {
   const projectId = req.params.projectId;
@@ -87,5 +96,6 @@ module.exports = {
   updateProject,
   softDelete,
   getAllData,
-  getProjectsOnly
+  getProjectsOnly,
+  getAllDataByProjectId
 };
