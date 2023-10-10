@@ -20,6 +20,7 @@ const getAll = async () => await project
 .from('projects as p')
 .leftJoin('images as i', 'p.project_id', 'i.project_id')
 .join('category as c', 'p.categories_id', 'c.categories_id');
+
 const getByIdProject = async (projectId) =>
   await project
     .select("*")
@@ -66,6 +67,9 @@ const getAllDataById = async (projectId) => await project
   'p.project_title',
   'p.description',
   'p.categories_id',
+  'p.created_by',
+  'p.completed_on',
+  'p.client_name',
   'p.created_at',
   'p.updated_at',
   'p.is_deleted',
