@@ -20,8 +20,8 @@ router.use('/auth/', auth_routes);
 
 
 // master data routes usage 
-router.use('/master/', accessControl, masterRoutes);
-
+router.use('/master/', verifyToken, accessControl, masterRoutes);
+ 
 // Upload Image
 router.get('/file/:filename', UploadImgController.getFile)
 router.post('/upload', upload.single('file'), UploadImgController.uploadFile)
